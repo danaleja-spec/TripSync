@@ -227,6 +227,32 @@
   .sec { unicode-bidi: isolate; cursor: pointer; } .sec.empty { color: var(--coral); font-weight: 700; letter-spacing: 0; }
   .prows .bar { margin-bottom: 8px; } .prows { margin-bottom: 16px; } .bar .none { color: var(--mute); }
   .imgwrap.tkimg { background: #fff; border: 1px solid var(--line); }
+  .bprows { margin-bottom: 16px; } .bprows .docrow { margin-bottom: 8px; }
+  .tk.add { background: transparent; border: 1.5px dashed #cdd3de; box-shadow: none; }
+  .tk.add .tile { background: #eef1f5; color: var(--ink-2); }
+  .tk.add .ts { color: var(--mute); }
+  .near-box { padding: 6px 16px 8px; }
+  .btn.near { margin: 0; background: #fff; border: 1.5px solid var(--coral); color: var(--coral); }
+  .btn.near .i { width: 20px; height: 20px; }
+  .btn.danger { color: #d92d20; }
+  .fld { display: block; margin-bottom: 14px; }
+  .fld > span { display: block; font-size: 13px; font-weight: 700; color: var(--mute); margin-bottom: 6px; }
+  .fld input { width: 100%; height: 48px; border: 1px solid var(--line); border-radius: 15px; padding: 0 14px; font: inherit; font-size: 13px; background: #fff; color: var(--ink); text-align: right; }
+  .fld-row { display: flex; gap: 10px; } .fld-row .fld { flex: 1; min-width: 0; }
+  .thumbs { display: flex; gap: 8px; flex-wrap: wrap; } .thumbs:not(:empty) { margin-bottom: 10px; }
+  .thumbs .th { position: relative; width: 72px; height: 72px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+  .thumbs .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumbs .th button { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: rgba(15,23,42,.78); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .fchips { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 12px; padding: 0 16px 4px; scrollbar-width: none; }
+  .fchips::-webkit-scrollbar { display: none; }
+  .fchip { flex: 0 0 auto; height: 36px; padding: 0 14px; border-radius: 15px; background: #eef1f5; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+  .fchip.on { background: var(--ink); color: #fff; }
+  .nrow { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 15px; padding: 10px 12px 10px 14px; margin-bottom: 8px; }
+  .nrow .meta .t { font-size: 13px; }
+  .nrow .go2 { display: flex; align-items: center; gap: 4px; color: var(--coral); font-weight: 800; font-size: 13px; white-space: nowrap; }
+  .nrow .go2 .i { width: 16px; height: 16px; }
+  .nstat { text-align: center; color: var(--ink-2); font-size: 13px; line-height: 1.6; padding: 36px 8px; }
+  .nattr { text-align: center; color: var(--mute); font-size: 13px; margin-top: 10px; }
   .docrow .view { background: #eef1f5; padding: 7px 14px; border-radius: 10px; font-weight: 800; font-size: 13px; }
 
   /* ---------- BOTTOM NAV ---------- */
@@ -339,6 +365,7 @@
     list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
     ticket: '<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2M13 17v2M13 11v2"/>',
     pin: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
     chev: '<path d="m15 18-6-6 6-6"/>',
     chevd: '<path d="m6 9 6 6 6-6"/>',
     ext: '<path d="M7 17 17 7M8 7h9v9"/>',
@@ -369,7 +396,7 @@
     { n: 16, wd: 'ד׳', title: 'יום 1 • נחיתה והגעה לדירה', items: [
       { t: '11:55', key: 1, icon: 'plane', tone: 'pink', title: 'טיסה לוורשה • Wizz Air', sub: 'טיסה W61560 • נתב״ג טרמינל 3', chip: ['green', 'כרטיס עלייה למטוס'],
         det: [['זמנים ומסלול', 'המראה מנתב״ג ב-11:55, נחיתה בוורשה שופן (WAW) ב-15:00.'], ['קוד הזמנה וכבודה', 'קוד Wizz: <b>%%S:pnr1%%</b> | הזמנה: %%S:wizord%%. מזוודה 20 ק״ג לדנה, תיקי גב לילדים. חובה צ׳ק-אין אונליין 24 שעות מראש.']],
-        btns: [{ k: 'dark', l: 'אתר Wizz Air לצ׳ק-אין ' + '↗', href: 'https://www.wizzair.com/en-gb/booking/check-in' }] },
+        btns: [{ k: 'dark', l: 'צ׳ק-אין באפליקציית Wizz Air', app: 'wizz', href: 'https://www.wizzair.com/en-gb/booking/check-in' }] },
       { transit: ['bus', '25 דק׳ • אוטובוס קו 175 למרכז (4.40 zł)'] },
       { t: '16:00', icon: 'hotel', tone: 'lav', title: 'צ׳ק-אין • דירה באוחוטה', sub: 'Warsaw Central Apartment', chip: ['green', 'מאושר • 4 לילות'],
         det: [['כתובת ופרטי כניסה', 'Aleja Niepodległości 245, Ochota, ורשה. מספר אישור: <b>%%S:bk%%</b> | קוד סודי (PIN): <b>%%S:pin%%</b>. טלפון מארחים: <span dir="ltr">+48913111112</span>.']],
@@ -437,11 +464,11 @@
           '<div class="bp-mid"><div class="end"><div class="d">' + o.d1 + '</div><div class="utc">' + o.u1 + '</div><div class="tm">' + o.t1 + '</div><div class="city">' + o.c1 + '</div><div class="term">' + o.m1 + '</div></div>' +
           '<div class="cen"><span class="pill-ok">בזמן (On-time)</span><div class="plane-c">' + ic('plane') + '</div><div class="dur">' + o.dur + '</div></div>' +
           '<div class="end" style="text-align:left"><div class="d">' + o.d2 + '</div><div class="utc">' + o.u2 + '</div><div class="tm">' + o.t2 + '</div><div class="city">' + o.c2 + '</div><div class="term">' + o.m2 + '</div></div></div>' +
-          '<div class="bp-cut"></div><div class="bp-foot"><a class="btn dark" target="_blank" rel="noopener" href="' + o.href + '">' + o.btn + ' ↗</a></div></div>';
+          '<div class="bp-cut"></div><div class="bp-foot"><a class="btn dark" data-app="' + o.app + '" href="' + o.href + '">' + o.btn + '</a></div></div>';
       }
-      return card({ no: 'W6&nbsp;&nbsp;1560', code: '%%S:pnr1%%', d1: 'יום ד׳, 16 דצמ׳', u1: 'UTC+2', t1: '11:55', c1: 'תל אביב', m1: 'טרמינל 3', d2: 'יום ד׳, 16 דצמ׳', u2: 'UTC+1', t2: '15:00', c2: 'ורשה שופן', m2: 'טרמינל ראשי', dur: '4:05 שעות', href: 'https://www.wizzair.com/en-gb/booking/check-in', btn: 'צ׳ק-אין אונליין באתר Wizz Air' }) +
+      return card({ no: 'W6&nbsp;&nbsp;1560', code: '%%S:pnr1%%', d1: 'יום ד׳, 16 דצמ׳', u1: 'UTC+2', t1: '11:55', c1: 'תל אביב', m1: 'טרמינל 3', d2: 'יום ד׳, 16 דצמ׳', u2: 'UTC+1', t2: '15:00', c2: 'ורשה שופן', m2: 'טרמינל ראשי', dur: '4:05 שעות', href: 'https://www.wizzair.com/en-gb/booking/check-in', btn: 'צ׳ק-אין אונליין באפליקציית Wizz Air', app: 'wizz' }) +
         '<ul class="bp-notes"><li>• <b>כבודה:</b> מזוודה 20 ק״ג לדנה, תיקי גב לילדים.</li><li>• <b>חובה לבצע צ׳ק-אין אונליין 24 שעות מראש.</b></li></ul>' +
-        card({ no: 'LO&nbsp;&nbsp;155', code: '%%S:pnr2%%', d1: 'יום א׳, 20 דצמ׳', u1: 'UTC+1', t1: '15:00', c1: 'ורשה שופן', m1: 'טרמינל ראשי', d2: 'יום א׳, 20 דצמ׳', u2: 'UTC+2', t2: '19:45', c2: 'תל אביב', m2: 'טרמינל 3', dur: '3:45 שעות', href: 'https://www.lot.com', btn: 'צ׳ק-אין אונליין באתר LOT' }) +
+        card({ no: 'LO&nbsp;&nbsp;155', code: '%%S:pnr2%%', d1: 'יום א׳, 20 דצמ׳', u1: 'UTC+1', t1: '15:00', c1: 'ורשה שופן', m1: 'טרמינל ראשי', d2: 'יום א׳, 20 דצמ׳', u2: 'UTC+2', t2: '19:45', c2: 'תל אביב', m2: 'טרמינל 3', dur: '3:45 שעות', href: 'https://www.lot.com', btn: 'צ׳ק-אין אונליין באפליקציית LOT', app: 'lot' }) +
         '<ul class="bp-notes"><li>• <b>כבודה:</b> טרולי 8 ק״ג + מזוודה 23 ק״ג.</li></ul>';
     } },
     copernicus: { title: 'כרטיסים • מרכז המדע קופרניקוס', html: function () {
@@ -477,10 +504,68 @@
   /* ---------- STORAGE (edits stay on this device only) ---------- */
   var DEFAULTS = { 'geva-disability': '', 'w1': '', 'w2': '', 'w3': '', 'w4': '', 'k1': '', 'k2': '', 'k3': '', 'k4': '' };
   var TKT = { w1: 'כרטיס מבוגר רגיל', w2: 'כרטיס מבוגר רגיל', w3: 'כרטיס ילד מוזל', w4: 'כרטיס מלווה עד גיל 16', k1: 'כרטיס נוער/ילד 1', k2: 'כרטיס נוער/ילד 2', k3: 'כרטיס נוער/ילד 3', k4: 'כרטיס חינם 4' };
-  var store = {};
-  try { store = JSON.parse(localStorage.getItem('warsaw_docs_v2') || '{}') || {}; } catch (e) { store = {}; }
-  function saveStore() { try { localStorage.setItem('warsaw_docs_v2', JSON.stringify(store)); return true; } catch (e) { return false; } }
+  var store = {}, legacy = {};
+  try { legacy = JSON.parse(localStorage.getItem('warsaw_docs_v2') || '{}') || {}; } catch (e) { legacy = {}; }
+  Object.keys(legacy).forEach(function (k) { store[k] = legacy[k]; });
+  var IDB = null;
   function img(key) { return store[key] || DEFAULTS[key] || ''; }
+  function saveImg(key, data, cb) {
+    store[key] = data;
+    if (IDB) {
+      try { var tx = IDB.transaction('img', 'readwrite'); tx.objectStore('img').put(data, key); tx.oncomplete = function () { cb(true); }; tx.onerror = tx.onabort = function () { cb(false); }; return; } catch (e) {}
+    }
+    try { legacy[key] = data; localStorage.setItem('warsaw_docs_v2', JSON.stringify(legacy)); cb(true); } catch (e) { cb(false); }
+  }
+  function delImg(key) {
+    delete store[key];
+    if (IDB) { try { IDB.transaction('img', 'readwrite').objectStore('img').delete(key); } catch (e) {} }
+    if (legacy[key] !== undefined) { delete legacy[key]; try { localStorage.setItem('warsaw_docs_v2', JSON.stringify(legacy)); } catch (e) {} }
+  }
+  function idbInit(done) {
+    try {
+      var rq = indexedDB.open('warsaw_trip', 1);
+      rq.onupgradeneeded = function () { rq.result.createObjectStore('img'); };
+      rq.onerror = function () { done(false); };
+      rq.onsuccess = function () {
+        IDB = rq.result; var seen = {}, changed = false;
+        try {
+          var tx = IDB.transaction('img', 'readonly'), cur = tx.objectStore('img').openCursor();
+          cur.onsuccess = function () { var c = cur.result; if (c) { seen[c.key] = 1; if (store[c.key] !== c.value) { store[c.key] = c.value; changed = true; } c.continue(); } };
+          tx.oncomplete = function () {
+            var miss = Object.keys(store).filter(function (k) { return !seen[k]; });
+            if (miss.length) {
+              try {
+                var wx = IDB.transaction('img', 'readwrite'), os = wx.objectStore('img');
+                miss.forEach(function (k) { os.put(store[k], k); });
+                wx.oncomplete = function () { try { localStorage.removeItem('warsaw_docs_v2'); legacy = {}; } catch (e) {} };
+              } catch (e) {}
+            }
+            done(changed);
+          };
+          tx.onerror = function () { done(false); };
+        } catch (e) { done(false); }
+      };
+    } catch (e) { done(false); }
+  }
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+
+  /* ---------- CUSTOM TICKETS (text details in localStorage, images in IndexedDB) ---------- */
+  var CT = [];
+  try { CT = JSON.parse(localStorage.getItem('warsaw_ct_v1') || '[]') || []; } catch (e) { CT = []; }
+  function saveCTMeta() { try { localStorage.setItem('warsaw_ct_v1', JSON.stringify(CT)); return true; } catch (e) { return false; } }
+  function ctById(id) { return CT.filter(function (c) { return c.id === id; })[0] || null; }
+  function fmtDate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? m[3] + '.' + m[2] + '.' + m[1] : ''; }
+  function ctWhen(c) { return [fmtDate(c.date), c.time].filter(Boolean).join(' • '); }
+  var CT_TONES = ['pink', 'lav', 'blue', 'mint', 'yellow'];
+  function tilesHTML() {
+    return '<button type="button" class="tk wide" data-sheet="flights"><div class="top"><span class="tile pink">' + ic('plane') + '</span><span class="count">2 טיסות</span></div><div class="tt">טיסות</div><div class="ts">Wizz Air &amp; LOT<br>הלוך וחזור</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
+      '<button type="button" class="tk" data-sheet="copernicus"><div class="top"><span class="tile mint">' + ic('flask') + '</span><span class="count">4 כרטיסים</span></div><div class="tt">מוזיאון המדע</div><div class="ts">קופרניקוס • 17.12<br>אישור%%V:cnkshort%%</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
+      '<button type="button" class="tk" data-sheet="wedel"><div class="top"><span class="tile yellow">' + ic('grid') + '</span><span class="count">4 כרטיסים</span></div><div class="tt">מפעל השוקולד</div><div class="ts">Wedel • 18.12<br>סיור מודרך</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
+      CT.map(function (c, i) {
+        return '<button type="button" class="tk" data-ct="' + esc(c.id) + '"><div class="top"><span class="tile ' + CT_TONES[i % CT_TONES.length] + '">' + ic('ticket') + '</span><span class="count">' + (c.n ? c.n + ' כרטיסים' : 'ללא תמונה') + '</span></div><div class="tt">' + esc(c.name) + '</div><div class="ts">' + esc(ctWhen(c) || c.addr || '') + (c.ref ? '<br><span dir="ltr">' + esc(c.ref) + '</span>' : '') + '</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>';
+      }).join('') +
+      '<button type="button" class="tk add" data-addct="1"><div class="top"><span class="tile">' + ic('plus') + '</span></div><div class="tt">הוספת כרטיסים</div><div class="ts">מקום, תאריך, אישור ותמונה</div></button>';
+  }
 
   /* ---------- PRIVATE VALUES (kept on this device only) ---------- */
   var SECDEF = {}, SECST = {};
@@ -512,7 +597,7 @@
     if (b.row) return '<div class="btn-row">' + b.row.map(renderBtn).join('') + '</div>';
     var cls = 'btn ' + b.k;
     if (b.sheet) return '<button type="button" class="' + cls + '" data-sheet="' + b.sheet + '">' + esc(b.l) + '</button>';
-    var ext = /^https?:/.test(b.href) ? ' target="_blank" rel="noopener"' : '';
+    var ext = b.app ? ' data-app="' + b.app + '"' : (/^https?:/.test(b.href) ? ' target="_blank" rel="noopener"' : '');
     return '<a class="' + cls + '" href="' + b.href + '"' + ext + '>' + b.l + '</a>';
   }
   function renderDay(d, idx) {
@@ -536,7 +621,7 @@
         x.det.map(function (s) { return '<h4>' + esc(s[0]) + '</h4><p>' + s[1] + '</p>'; }).join('') +
         (x.btns || []).map(renderBtn).join('') + '</div></div></div></article></div></div>';
     });
-    return h + '</div></div>';
+    return h + '</div><div class="near-box"><button type="button" class="btn near" data-near="1">' + ic('pin') + 'פעילויות קרובות אליי עכשיו</button></div></div>';
   }
   function renderSchedule() {
     return '<section class="screen active" id="s-schedule" aria-label="לו״ז">' +
@@ -554,11 +639,7 @@
   /* ---------- RENDER: TICKETS ---------- */
   function renderTickets() {
     return '<section class="screen" id="s-tickets" aria-label="כרטיסים"><div class="page-head"><div class="h"><h1>כרטיסים והזמנות</h1>' + ic('ticket') + '</div><p>לחצו על כל קובייה לפתיחת הכרטיס המלא</p></div>' +
-      '<div class="pad"><div class="tiles">' +
-      '<button type="button" class="tk wide" data-sheet="flights"><div class="top"><span class="tile pink">' + ic('plane') + '</span><span class="count">2 טיסות</span></div><div class="tt">טיסות</div><div class="ts">Wizz Air &amp; LOT<br>הלוך וחזור</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
-      '<button type="button" class="tk" data-sheet="copernicus"><div class="top"><span class="tile mint">' + ic('flask') + '</span><span class="count">4 כרטיסים</span></div><div class="tt">מוזיאון המדע</div><div class="ts">קופרניקוס • 17.12<br>אישור%%V:cnkshort%%</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
-      '<button type="button" class="tk" data-sheet="wedel"><div class="top"><span class="tile yellow">' + ic('grid') + '</span><span class="count">4 כרטיסים</span></div><div class="tt">מפעל השוקולד</div><div class="ts">Wedel • 18.12<br>סיור מודרך</div><div class="go">לכרטיסים ' + ic('chev') + '</div></button>' +
-      '</div></div></section>';
+      '<div class="pad"><div class="tiles" id="tiles">' + tilesHTML() + '</div></div></section>';
   }
 
   /* ---------- RENDER: APARTMENT ---------- */
@@ -595,6 +676,12 @@
     return '<div class="ticketbox"><ul><li>• <b>הלוך (Wizz W61560):</b> קוד %%S:pnr1%% | תיק גב קטן מתחת למושב</li><li>• <b>חזור (LOT LO155):</b> קוד %%S:pnr2%% | טרולי 8 ק״ג לתא הנוסעים</li></ul>' +
       (p.kind === 'toddler' ? '<div class="notice">🚌 פטורה לחלוטין מתשלום בתחבורה הציבורית בוורשה (מתחת לגיל 7).</div>' : '') + '</div>';
   }
+  function bpRows(p) {
+    return '<div class="bprows">' + [['out', 'הלוך • Wizz Air', '16.12 • TLV ← WAW'], ['ret', 'חזור • LOT', '20.12 • WAW ← TLV']].map(function (r) {
+      var k = 'bp-' + p.id + '-' + r[0];
+      return '<div class="docrow"><div class="tx"><b>בורדינג פס • ' + r[1] + '</b><small dir="ltr">' + r[2] + '</small></div><button type="button" class="view" data-ticket="' + k + '">' + (img(k) ? 'צפייה ›' : 'העלאה +') + '</button></div>';
+    }).join('') + '</div>';
+  }
   function renderFamily() {
     return '<section class="screen" id="s-family" aria-label="נוסעים"><div class="page-head"><div class="h"><h1>נוסעים וכבודה</h1>' + ic('users') + '</div><p>פירוט שמות, גילאים והקצאת כבודה לטיסות</p></div><div class="pad">' +
       PAX.map(function (p, i) {
@@ -603,7 +690,7 @@
           '<span class="meta"><span class="t">' + (i + 1) + '. ' + p.name + '</span><span class="s">' + p.sub + '</span></span><span class="chip ' + p.chip[0] + '">' + p.chip[1] + '</span><span class="chev">' + ic('chevd') + '</span></button>' +
           '<div class="collapse"><div><div class="pax-body"><h5>מספרי דרכונים</h5>' + passRows(p) +
           (p.disability ? '<div class="docrow"><div class="tx"><b>תעודת נכה • ' + p.name + '</b><small>לחצו לצפייה בתעודה</small></div><button type="button" class="view" data-disability="1">' + (img('geva-disability') ? 'צפייה ›' : 'העלאה +') + '</button></div>' : '') +
-          '<h5>כרטיסי טיסה וכבודה' + (p.kind === 'adult' ? ' אישית' : '') + '</h5>' + flightsFor(p) + '</div></div></div></article>';
+          '<h5>כרטיסי טיסה וכבודה' + (p.kind === 'adult' ? ' אישית' : '') + '</h5>' + flightsFor(p) + '<h5 style="margin-top:16px">בורדינג פס</h5>' + bpRows(p) + '</div></div></div></article>';
       }).join('') + '</div></section>';
   }
 
@@ -666,19 +753,89 @@
     sheetKey = null; overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true'); sheet.style.transform = '';
     document.body.style.overflow = '';
   }
-  function openNamed(k) { var s = SHEETS[k]; if (s) { sheetKey = null; openSheet(s.title, s.html()); } }
   var sheetKey = null, sheetBack = null;
-  function titleFor(key) {
-    if (key === 'geva-disability') return 'תעודת נכה • גבע אמיר';
-    if (TKT[key]) return (key[0] === 'w' ? 'מפעל השוקולד • ' : 'קופרניקוס • ') + TKT[key];
-    var pid = key.split('-')[0], kind = key.split('-')[1], who = PAX.filter(function (p) { return p.id === pid; })[0];
-    return PASS_LABEL[kind] + ' • ' + who.name;
+  function openNamed(k) {
+    if (k.indexOf('ct:') === 0) { openCustom(k.slice(3)); return; }
+    var s = SHEETS[k]; if (s) { sheetKey = null; openSheet(s.title, s.html()); }
+  }
+  function docInfo(key) {
+    if (key === 'geva-disability') return { title: 'תעודת נכה • גבע אמיר' };
+    if (TKT[key]) return { title: (key[0] === 'w' ? 'מפעל השוקולד • ' : 'קופרניקוס • ') + TKT[key], back: key[0] === 'w' ? 'wedel' : 'copernicus', white: 1 };
+    var m = /^bp-(\w+)-(out|ret)$/.exec(key), who;
+    if (m) { who = PAX.filter(function (p) { return p.id === m[1]; })[0]; return { title: 'בורדינג פס ' + (m[2] === 'out' ? 'הלוך' : 'חזור') + ' • ' + who.name, white: 1 }; }
+    m = /^ct-(\w+)-(\d+)$/.exec(key);
+    if (m) { var c = ctById(m[1]); return { title: (c ? c.name : 'כרטיס') + ' • כרטיס ' + (+m[2] + 1), back: 'ct:' + m[1], white: 1 }; }
+    var pid = key.split('-')[0], kind = key.split('-')[1];
+    who = PAX.filter(function (p) { return p.id === pid; })[0];
+    return { title: PASS_LABEL[kind] + ' • ' + who.name };
   }
   function openImage(key) {
-    var src = img(key); sheetKey = key;
-    openSheet(titleFor(key), src
-      ? '<div class="imgwrap' + (TKT[key] ? ' tkimg' : '') + '"><img class="big-img" src="' + src + '" alt="' + esc(titleFor(key)) + '">' + '<button type="button" class="pen lg" data-edit="' + key + '" aria-label="עריכה והעלאה מחדש">' + ic('pen') + '</button>' + '</div>'
-      : '<button type="button" class="up-btn" data-edit="' + key + '">' + ic('img') + '<span>לחצו להעלאת תמונה</span></button>', TKT[key] ? (key[0] === 'w' ? 'wedel' : 'copernicus') : null);
+    var src = img(key), di = docInfo(key); sheetKey = key;
+    openSheet(di.title, src
+      ? '<div class="imgwrap' + (di.white ? ' tkimg' : '') + '"><img class="big-img" src="' + src + '" alt="' + esc(di.title) + '"><button type="button" class="pen lg" data-edit="' + key + '" aria-label="עריכה והעלאה מחדש">' + ic('pen') + '</button></div>'
+      : '<button type="button" class="up-btn" data-edit="' + key + '">' + ic('img') + '<span>לחצו להעלאת תמונה</span></button>', di.back || null);
+  }
+
+  /* ---------- CUSTOM TICKETS UI ---------- */
+  var FORM = null;
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function openCustom(id) {
+    var c = ctById(id); if (!c) return; sheetKey = null;
+    var rows = '', i;
+    for (i = 0; i < c.n; i++) rows += '<div class="docrow"><div class="tx"><b>כרטיס ' + (i + 1) + '</b><small>לחצו לצפייה בכרטיס</small></div><button type="button" class="view" data-ticket="ct-' + c.id + '-' + i + '">צפייה ›</button></div>';
+    var when = ctWhen(c);
+    openSheet(c.name, '<div class="panel">' +
+      (when ? '<div class="lbl">מועד:</div><div class="val">' + esc(when) + '</div>' : '') +
+      (c.ref ? '<div class="lbl" style="font-size:13px;color:var(--ink)">מספר אישור / עסקה:</div><div class="codebox">' + esc(c.ref) + '</div>' : '') +
+      (c.n ? '<div class="strong" style="font-size:13px;margin:0 0 10px">הכרטיסים:</div>' + rows : '<div class="addr">לא הועלתה תמונה של כרטיס.</div>') +
+      (c.addr ? '<div class="addr" style="margin-top:12px">כתובת: ' + esc(c.addr) + '</div><a class="btn dark" target="_blank" rel="noopener" href="' + gm(c.addr) + '">ניווט למקום</a>' : '') +
+      '<div class="btn-row" style="margin-top:8px"><button type="button" class="btn outline" style="margin:0;flex:1" data-editct="' + c.id + '">עריכה</button><button type="button" class="btn outline danger" style="margin:0;flex:1" data-delct="' + c.id + '">מחיקה</button></div></div>');
+  }
+  function fld(id, label, type, v, ph) { return '<label class="fld"><span>' + label + '</span><input id="' + id + '" type="' + type + '" value="' + esc(v || '') + '"' + (ph ? ' placeholder="' + ph + '"' : '') + ' autocomplete="off"></label>'; }
+  function renderThumbs() {
+    var el = document.getElementById('f-thumbs'); if (!el || !FORM) return;
+    el.innerHTML = FORM.imgs.map(function (s, i) { return '<div class="th"><img src="' + s + '" alt=""><button type="button" data-rmimg="' + i + '" aria-label="הסרה">✕</button></div>'; }).join('');
+    var b = document.getElementById('f-addimg'); if (b) b.textContent = FORM.imgs.length ? 'הוספת תמונה נוספת' : 'בחירת תמונות של הכרטיסים';
+  }
+  function openForm(id) {
+    var c = id ? ctById(id) : null, i;
+    FORM = { id: id || null, imgs: [] };
+    if (c) for (i = 0; i < c.n; i++) { var s = img('ct-' + id + '-' + i); if (s) FORM.imgs.push(s); }
+    sheetKey = null;
+    openSheet(c ? 'עריכת כרטיסים' : 'הוספת כרטיסים', '<div class="form">' +
+      fld('f-name', 'שם המקום', 'text', c && c.name, 'למשל: זו ורשה') +
+      '<div class="fld-row">' + fld('f-date', 'תאריך', 'date', c && c.date) + fld('f-time', 'שעה', 'time', c && c.time) + '</div>' +
+      fld('f-addr', 'כתובת', 'text', c && c.addr, 'רחוב ומספר, ורשה') +
+      fld('f-ref', 'מספר אישור / עסקה', 'text', c && c.ref) +
+      '<div class="fld"><span>תמונה של הכרטיסים</span><div class="thumbs" id="f-thumbs"></div><button type="button" class="btn outline" id="f-addimg" style="margin:0" data-pickimgs="1"></button>' +
+      '<input type="file" accept="image/*" id="f-files" multiple hidden></div>' +
+      '<button type="button" class="btn dark" data-ctsave="1">אישור</button></div>', c ? 'ct:' + id : null);
+    renderThumbs();
+  }
+  function saveCT() {
+    var name = val('f-name');
+    if (!name) { alert('נא להזין את שם המקום'); return; }
+    var id = FORM.id || ('c' + Date.now().toString(36)), old = ctById(id), oldN = old ? old.n : 0, imgs = FORM.imgs.slice();
+    var rec = { id: id, name: name, date: val('f-date'), time: val('f-time'), addr: val('f-addr'), ref: val('f-ref'), n: imgs.length };
+    var left = imgs.length, bad = false, i;
+    function finish() {
+      if (old) CT[CT.indexOf(old)] = rec; else CT.push(rec);
+      if (!saveCTMeta()) bad = true;
+      var tiles = document.getElementById('tiles'); if (tiles) tiles.innerHTML = tok(tilesHTML());
+      closeSheet(); FORM = null;
+      if (bad) alert('חלק מהנתונים לא נשמרו (אין מקום פנוי במכשיר).');
+      var last = document.querySelector('.tk[data-ct="' + id + '"]'); if (last && last.scrollIntoView) last.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    for (i = imgs.length; i < oldN; i++) delImg('ct-' + id + '-' + i);
+    if (!left) { finish(); return; }
+    imgs.forEach(function (s, i) { saveImg('ct-' + id + '-' + i, s, function (ok) { if (!ok) bad = true; if (--left === 0) finish(); }); });
+  }
+  function delCT(id) {
+    var c = ctById(id); if (!c || !confirm('למחוק את "' + c.name + '"?')) return;
+    for (var i = 0; i < c.n; i++) delImg('ct-' + id + '-' + i);
+    CT = CT.filter(function (x) { return x.id !== id; }); saveCTMeta();
+    var tiles = document.getElementById('tiles'); if (tiles) tiles.innerHTML = tok(tilesHTML());
+    closeSheet();
   }
   document.getElementById('sh-x').addEventListener('click', function () { if (sheetBack) openNamed(sheetBack); else closeSheet(); });
   overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSheet(); });
@@ -710,10 +867,11 @@
     if (!f || !key) return;
     compress(f, function (data) {
       if (!data) { alert('לא הצלחתי לקרוא את הקובץ. נסו תמונה אחרת.'); return; }
-      store[key] = data;
-      if (!saveStore()) alert('התמונה הוחלפה רק לשימוש הנוכחי (אין מקום לשמירה במכשיר).');
-      document.querySelectorAll('[data-ticket="' + key + '"]' + (key === 'geva-disability' ? ',[data-disability]' : '')).forEach(function (b) { b.textContent = 'צפייה ›'; });
-      if (sheetKey === key) openImage(key);
+      saveImg(key, data, function (ok) {
+        if (!ok) alert('התמונה הוחלפה רק לשימוש הנוכחי (אין מקום לשמירה במכשיר).');
+        document.querySelectorAll('[data-ticket="' + key + '"]' + (key === 'geva-disability' ? ',[data-disability]' : '')).forEach(function (b) { b.textContent = 'צפייה ›'; });
+        if (sheetKey === key) openImage(key);
+      });
     });
   });
 
@@ -743,6 +901,120 @@
       renderWx();
     }).catch(function () { clearTimeout(to); });
   }
+
+  /* ---------- NEARBY ACTIVITIES (location stays on the device; places from OpenStreetMap) ---------- */
+  var NEAR = { items: null, filter: 'all', tok: 0, pos: null };
+  var NCATS = { eat: { l: 'לאכול', i: 'food', t: 'yellow' }, sweet: { l: 'קפה וקינוחים', i: 'coffee', t: 'lav' }, museum: { l: 'מוזיאונים', i: 'flask', t: 'mint' }, mall: { l: 'קניונים', i: 'bag', t: 'pink' }, park: { l: 'פארקים ומשחקים', i: 'tree', t: 'mint' }, attr: { l: 'אטרקציות', i: 'castle', t: 'blue' } };
+  var NORDER = ['eat', 'sweet', 'museum', 'mall', 'park', 'attr'];
+  function nearCat(g) {
+    var a = g.amenity, tr = g.tourism, s = g.shop, l = g.leisure, h = g.historic;
+    if (a === 'restaurant' || a === 'fast_food' || a === 'food_court') return 'eat';
+    if (a === 'cafe' || a === 'ice_cream' || s === 'bakery' || s === 'pastry' || s === 'confectionery' || s === 'chocolate') return 'sweet';
+    if (tr === 'museum' || tr === 'gallery') return 'museum';
+    if (s === 'mall' || s === 'department_store') return 'mall';
+    if (l === 'playground' || l === 'park' || l === 'ice_rink' || l === 'water_park' || l === 'miniature_golf' || l === 'trampoline_park' || l === 'amusement_arcade') return 'park';
+    if (tr === 'attraction' || tr === 'zoo' || tr === 'aquarium' || tr === 'theme_park' || tr === 'viewpoint' || h === 'castle' || h === 'monument') return 'attr';
+    return null;
+  }
+  function nearQuery(lat, lon) {
+    var c = lat + ',' + lon;
+    function q(r, f) { return 'nwr(around:' + r + ',' + c + ')' + f + ';'; }
+    return '[out:json][timeout:25];(' +
+      q(700, '["amenity"~"^(restaurant|fast_food|food_court)$"]["name"]') + q(600, '["amenity"~"^(cafe|ice_cream)$"]["name"]') +
+      q(600, '["shop"~"^(bakery|pastry|confectionery|chocolate)$"]["name"]') + q(2500, '["tourism"~"^(museum|gallery)$"]["name"]') +
+      q(3000, '["shop"~"^(mall|department_store)$"]["name"]') + q(1500, '["leisure"~"^(playground|ice_rink|water_park|miniature_golf|trampoline_park|amusement_arcade)$"]') +
+      q(1500, '["leisure"="park"]["name"]') + q(2500, '["tourism"~"^(attraction|zoo|aquarium|theme_park|viewpoint)$"]["name"]') +
+      q(2500, '["historic"~"^(castle|monument)$"]["name"]') + ');out center tags 800;';
+  }
+  function overpass(q, cb) {
+    var urls = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'], i = 0;
+    (function next() {
+      if (i >= urls.length) return cb(null);
+      var ctl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 18000);
+      fetch(urls[i++], { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, signal: ctl ? ctl.signal : undefined })
+        .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+        .then(function (d) { clearTimeout(to); cb(d); }).catch(function () { clearTimeout(to); next(); });
+    })();
+  }
+  function dist(a, b, c, d) {
+    var R = 6371000, p = Math.PI / 180, x = (c - a) * p, y = (d - b) * p;
+    var h = Math.sin(x / 2) * Math.sin(x / 2) + Math.cos(a * p) * Math.cos(c * p) * Math.sin(y / 2) * Math.sin(y / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function fmtDist(m) { return m < 1000 ? (Math.max(10, Math.round(m / 10) * 10)) + ' מ׳' : (m / 1000).toFixed(1) + ' ק״מ'; }
+  function parseNear(d, lat, lon) {
+    var seen = {}, out = [];
+    ((d && d.elements) || []).forEach(function (e) {
+      var g = e.tags || {}, la = e.lat !== undefined ? e.lat : (e.center && e.center.lat), lo = e.lon !== undefined ? e.lon : (e.center && e.center.lon), cat = nearCat(g);
+      if (!cat || la === undefined || lo === undefined) return;
+      var name = g['name:he'] || g['name:en'] || g.name || (g.leisure === 'playground' ? 'מגרש משחקים' : '');
+      if (!name) return;
+      var key = cat + '|' + name + '|' + la.toFixed(3) + '|' + lo.toFixed(3); if (seen[key]) return; seen[key] = 1;
+      out.push({ name: name, cat: cat, lat: la, lon: lo, d: dist(lat, lon, la, lo) });
+    });
+    out.sort(function (a, b) { return a.d - b.d; });
+    return out;
+  }
+  function nearView(html) { var el = document.getElementById('nbody'); if (el) el.innerHTML = html; }
+  function nearList() {
+    var f = NEAR.filter, items = NEAR.items || [], shown;
+    if (f === 'all') {
+      var cnt = {}; shown = items.filter(function (x) { cnt[x.cat] = (cnt[x.cat] || 0) + 1; return cnt[x.cat] <= 6; });
+    } else shown = items.filter(function (x) { return x.cat === f; }).slice(0, 40);
+    if (!shown.length) return '<div class="nstat">לא נמצאו מקומות מהסוג הזה בסביבה.</div>';
+    return shown.map(function (x) {
+      var c = NCATS[x.cat], mins = Math.max(1, Math.round(x.d / 75));
+      return '<a class="nrow" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=' + x.lat + ',' + x.lon + '&amp;travelmode=walking">' +
+        '<span class="tile ' + c.t + '">' + ic(c.i) + '</span><span class="meta"><span class="t">' + esc(x.name) + '</span><span class="s">' + c.l + ' • ' + fmtDist(x.d) + ' • כ-' + mins + ' דק׳ הליכה</span></span><span class="go2">ניווט ' + ic('ext') + '</span></a>';
+    }).join('');
+  }
+  function nearScreen() {
+    var chips = [['all', 'הכל']].concat(NORDER.map(function (k) { return [k, NCATS[k].l]; }));
+    nearView('<div class="fchips">' + chips.map(function (c) { return '<button type="button" class="fchip' + (NEAR.filter === c[0] ? ' on' : '') + '" data-nf="' + c[0] + '">' + c[1] + '</button>'; }).join('') + '</div>' +
+      '<div id="nlist">' + nearList() + '</div><div class="nattr">מקומות לפי המיקום שלך • נתונים: © OpenStreetMap</div>');
+  }
+  function nearError(msg) { nearView('<div class="nstat">' + msg + '</div><button type="button" class="btn dark" data-nretry="1">נסו שוב</button>'); }
+  function openNear() {
+    var my = ++NEAR.tok; NEAR.filter = 'all'; sheetKey = null;
+    openSheet('פעילויות קרובות', '<div id="nbody"><div class="nstat">מאתר את המיקום שלך…</div></div>');
+    function alive() { return my === NEAR.tok && document.getElementById('nbody'); }
+    if (!navigator.geolocation) { nearError('הדפדפן הזה לא תומך באיתור מיקום.'); return; }
+    navigator.geolocation.getCurrentPosition(function (p) {
+      if (!alive()) return;
+      var lat = p.coords.latitude, lon = p.coords.longitude; NEAR.pos = [lat, lon];
+      nearView('<div class="nstat">מחפש מקומות קרובים…</div>');
+      overpass(nearQuery(lat, lon), function (d) {
+        if (!alive()) return;
+        if (!d) { nearError('לא הצלחתי לטעון מקומות. בדקו חיבור לאינטרנט ונסו שוב.'); return; }
+        NEAR.items = parseNear(d, lat, lon);
+        if (!NEAR.items.length) { nearError('לא נמצאו מקומות בסביבה שלך.'); return; }
+        nearScreen();
+      });
+    }, function (err) {
+      if (!alive()) return;
+      nearError(err && err.code === 1 ? 'אין הרשאת מיקום. אשרו גישה למיקום בהגדרות הדפדפן או האפליקציה ונסו שוב.' : 'לא הצלחתי לאתר את המיקום שלך. נסו שוב בחוץ או עם GPS פעיל.');
+    }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 });
+  }
+
+  /* ---------- OPEN AIRLINE APPS ---------- */
+  var APPS = { wizz: 'com.wizzair.WizzAirApp', lot: 'pl.lot.mobile' };
+  var PLAY = 'https://play.google.com/store/apps/details?id=';
+  function openApp(kind, web) {
+    var ua = navigator.userAgent || '';
+    if (/Android/i.test(ua)) {
+      location.href = 'intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=' + APPS[kind] + ';S.browser_fallback_url=' + encodeURIComponent(PLAY + APPS[kind]) + ';end';
+    } else window.open(web, '_blank', 'noopener');
+  }
+
+  /* ---------- RE-RENDER AFTER IMAGES LOAD ---------- */
+  function rerender() {
+    var tabEl = document.querySelector('.screen.active'), tab = tabEl ? tabEl.id : 's-schedule';
+    var dayEl = document.querySelector('.day.active'), day = dayEl ? +dayEl.getAttribute('data-day') : 16;
+    document.getElementById('screens').innerHTML = tok(renderSchedule() + renderTickets() + renderApartment() + renderFamily());
+    showTab(tab); showDay(day, false); renderWx();
+    window.scrollTo(0, 0);
+  }
+  idbInit(function (changed) { if (changed) rerender(); });
   document.addEventListener('visibilitychange', function () { if (!document.hidden && (!WX || Date.now() - (WX.ts || 0) > 600000)) loadWx(); });
   loadWx();
 
@@ -752,6 +1024,17 @@
     var sc = t.closest('.sec'); if (sc) { e.stopPropagation(); editSec(sc.getAttribute('data-sec')); return; }
     var bkl = t.closest('a[href="#bk"]');
     if (bkl) { e.preventDefault(); var bu = secVal('bk_url'); if (!bu) { bu = (prompt('הדביקו כאן את קישור ההזמנה מ-Booking (נשמר רק בטלפון הזה)', '') || '').trim(); if (bu) { SECST.bk_url = bu; try { localStorage.setItem('warsaw_sec_v1', JSON.stringify(SECST)); } catch (er) {} } } if (/^https?:/.test(bu)) window.open(bu, '_blank', 'noopener'); return; }
+    var ap = t.closest('a[data-app]'); if (ap) { e.preventDefault(); openApp(ap.getAttribute('data-app'), ap.getAttribute('href')); return; }
+    if (t.closest('[data-near]')) { openNear(); return; }
+    var nf = t.closest('[data-nf]'); if (nf) { NEAR.filter = nf.getAttribute('data-nf'); nearScreen(); return; }
+    if (t.closest('[data-nretry]')) { openNear(); return; }
+    var ctb = t.closest('[data-ct]'); if (ctb) { openCustom(ctb.getAttribute('data-ct')); return; }
+    if (t.closest('[data-addct]')) { openForm(null); return; }
+    var ect = t.closest('[data-editct]'); if (ect) { openForm(ect.getAttribute('data-editct')); return; }
+    var dct = t.closest('[data-delct]'); if (dct) { delCT(dct.getAttribute('data-delct')); return; }
+    if (t.closest('[data-ctsave]')) { saveCT(); return; }
+    if (t.closest('[data-pickimgs]')) { var ff = document.getElementById('f-files'); if (ff) ff.click(); return; }
+    var rm = t.closest('[data-rmimg]'); if (rm && FORM) { FORM.imgs.splice(+rm.getAttribute('data-rmimg'), 1); renderThumbs(); return; }
     var ed = t.closest('[data-edit]');
     if (ed) { e.stopPropagation(); pendingKey = ed.getAttribute('data-edit'); fileInput.click(); return; }
     var vw = t.closest('[data-view]'); if (vw) { openImage(vw.getAttribute('data-view')); return; }
@@ -762,6 +1045,14 @@
     var tk = t.closest('[data-ticket]'); if (tk) { openImage(tk.getAttribute('data-ticket')); return; }
     var head = t.closest('.card-head'); if (head) { toggleCard(head.parentElement, '.day-pane'); return; }
     var ph = t.closest('.pax-head'); if (ph) { toggleCard(ph.parentElement, '.screen'); return; }
+  });
+  document.addEventListener('change', function (e) {
+    var el = e.target; if (!el || el.id !== 'f-files' || !FORM) return;
+    var files = Array.prototype.slice.call(el.files || []); el.value = '';
+    (function next() {
+      var f = files.shift(); if (!f) return;
+      compress(f, function (data) { if (data && FORM) { FORM.imgs.push(data); renderThumbs(); } else if (!data) alert('לא הצלחתי לקרוא את אחד הקבצים.'); next(); });
+    })();
   });
   document.addEventListener('keydown', function (e) {
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.slot[data-view]')) { e.preventDefault(); e.target.click(); }
