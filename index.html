@@ -927,23 +927,31 @@
   }
   function nearQuery(lat, lon) {
     var c = lat + ',' + lon;
-    function q(r, f) { return 'nwr(around:' + r + ',' + c + ')' + f + ';'; }
-    return '[out:json][timeout:25];(' +
+    function q(r, f) { return (f.indexOf('"park"') > -1 ? 'nwr' : 'nw') + '(around:' + r + ',' + c + ')' + f + ';'; }
+    return '[out:json][timeout:20];(' +
       q(700, '["amenity"~"^(restaurant|fast_food|food_court)$"]["name"]') + q(600, '["amenity"~"^(cafe|ice_cream)$"]["name"]') +
-      q(600, '["shop"~"^(bakery|pastry|confectionery|chocolate)$"]["name"]') + q(2500, '["tourism"~"^(museum|gallery)$"]["name"]') +
-      q(3000, '["shop"~"^(mall|department_store)$"]["name"]') + q(1500, '["leisure"~"^(playground|ice_rink|water_park|miniature_golf|trampoline_park|amusement_arcade)$"]') +
-      q(1500, '["leisure"="park"]["name"]') + q(2500, '["tourism"~"^(attraction|zoo|aquarium|theme_park|viewpoint)$"]["name"]') +
-      q(2500, '["historic"~"^(castle|monument)$"]["name"]') + ');out center tags 800;';
+      q(600, '["shop"~"^(bakery|pastry|confectionery|chocolate)$"]["name"]') + q(2000, '["tourism"~"^(museum|gallery)$"]["name"]') +
+      q(2500, '["shop"~"^(mall|department_store)$"]["name"]') + q(1500, '["leisure"~"^(playground|ice_rink|water_park|miniature_golf|trampoline_park|amusement_arcade)$"]') +
+      q(1500, '["leisure"="park"]["name"]') + q(2000, '["tourism"~"^(attraction|zoo|aquarium|theme_park|viewpoint)$"]["name"]') +
+      q(2000, '["historic"~"^(castle|monument)$"]["name"]') + ');out center tags 800;';
   }
   function overpass(q, cb) {
-    var urls = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'], i = 0;
-    (function next() {
-      if (i >= urls.length) return cb(null);
-      var ctl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 18000);
-      fetch(urls[i++], { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, signal: ctl ? ctl.signal : undefined })
-        .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
-        .then(function (d) { clearTimeout(to); cb(d); }).catch(function () { clearTimeout(to); next(); });
-    })();
+    var urls = ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter'];
+    var pending = urls.length, done = false, diag = [];
+    urls.forEach(function (u) {
+      var host = u.split('/')[2], ctl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 22000);
+      fetch(u, { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, signal: ctl ? ctl.signal : undefined })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function (d) {
+          clearTimeout(to);
+          if (!d || !d.elements || (!d.elements.length && d.remark)) throw new Error('server busy');
+          if (!done) { done = true; cb(d, null); }
+        })
+        .catch(function (e) {
+          clearTimeout(to); diag.push(host + ': ' + (e && e.name === 'AbortError' ? 'timeout' : (e && e.message) || 'error'));
+          if (--pending === 0 && !done) { done = true; cb(null, diag); }
+        });
+    });
   }
   function dist(a, b, c, d) {
     var R = 6371000, p = Math.PI / 180, x = (c - a) * p, y = (d - b) * p;
@@ -992,9 +1000,9 @@
       if (!alive()) return;
       var lat = p.coords.latitude, lon = p.coords.longitude; NEAR.pos = [lat, lon];
       nearView('<div class="nstat">מחפש מקומות קרובים…</div>');
-      overpass(nearQuery(lat, lon), function (d) {
+      overpass(nearQuery(lat, lon), function (d, diag) {
         if (!alive()) return;
-        if (!d) { nearError('לא הצלחתי לטעון מקומות. בדקו חיבור לאינטרנט ונסו שוב.'); return; }
+        if (!d) { nearError('לא הצלחתי לטעון מקומות. נסו שוב בעוד רגע.<div class="nattr" dir="ltr">' + esc((diag || []).join(' | ')) + '</div>'); return; }
         NEAR.items = parseNear(d, lat, lon);
         if (!NEAR.items.length) { nearError('לא נמצאו מקומות בסביבה שלך.'); return; }
         nearScreen();
