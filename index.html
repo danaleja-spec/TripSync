@@ -236,8 +236,13 @@
   .btn.near .i { width: 20px; height: 20px; }
   .btn.danger { color: #d92d20; }
   .fld { display: block; margin-bottom: 14px; }
-  .fld > span { display: block; font-size: 13px; font-weight: 700; color: var(--mute); margin-bottom: 6px; }
+  .fld > span:first-child { display: block; font-size: 13px; font-weight: 700; color: var(--mute); margin-bottom: 6px; }
   .fld input { width: 100%; height: 48px; border: 1px solid var(--line); border-radius: 15px; padding: 0 14px; font: inherit; font-size: 13px; background: #fff; color: var(--ink); text-align: right; }
+  .inp { display: block; position: relative; }
+  .inp.has-i input { -webkit-appearance: none; appearance: none; padding-left: 46px; }
+  .inp.has-i .i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--ink-2); pointer-events: none; }
+  .inp.has-i input::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; margin: 0; padding: 0; }
+  .btn.coral { background: var(--coral); color: #fff; }
   .fld-row { display: flex; gap: 10px; } .fld-row .fld { flex: 1; min-width: 0; }
   .thumbs { display: flex; gap: 8px; flex-wrap: wrap; } .thumbs:not(:empty) { margin-bottom: 10px; }
   .thumbs .th { position: relative; width: 72px; height: 72px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
@@ -366,6 +371,7 @@
     ticket: '<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2M13 17v2M13 11v2"/>',
     pin: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
     chev: '<path d="m15 18-6-6 6-6"/>',
     chevd: '<path d="m6 9 6 6 6-6"/>',
     ext: '<path d="M7 17 17 7M8 7h9v9"/>',
@@ -394,9 +400,9 @@
   /* ---------- DATA ---------- */
   var DAYS = [
     { n: 16, wd: 'ד׳', title: 'יום 1 • נחיתה והגעה לדירה', items: [
-      { t: '11:55', key: 1, icon: 'plane', tone: 'pink', title: 'טיסה לוורשה • Wizz Air', sub: 'טיסה W61560 • נתב״ג טרמינל 3', chip: ['green', 'כרטיס עלייה למטוס'],
+      { t: '11:55', key: 1, icon: 'plane', tone: 'pink', title: 'טיסה לוורשה • Wizz Air', sub: 'טיסה W61560 • נתב״ג טרמינל 3', chip: ['green', 'פרטי טיסה'],
         det: [['זמנים ומסלול', 'המראה מנתב״ג ב-11:55, נחיתה בוורשה שופן (WAW) ב-15:00.'], ['קוד הזמנה וכבודה', 'קוד Wizz: <b>%%S:pnr1%%</b> | הזמנה: %%S:wizord%%. מזוודה 20 ק״ג לדנה, תיקי גב לילדים. חובה צ׳ק-אין אונליין 24 שעות מראש.']],
-        btns: [{ k: 'dark', l: 'צ׳ק-אין באפליקציית Wizz Air', app: 'wizz', href: 'https://www.wizzair.com/en-gb/booking/check-in' }] },
+        btns: [{ k: 'dark', l: 'הצג כרטיסי טיסה', sheet: 'flights' }, { k: 'coral', l: 'לוח טיסות בנתב״ג', href: 'https://www.iaa.gov.il/airports/ben-gurion/flight-board/' }] },
       { transit: ['bus', '25 דק׳ • אוטובוס קו 175 למרכז (4.40 zł)'] },
       { t: '16:00', icon: 'hotel', tone: 'lav', title: 'צ׳ק-אין • דירה באוחוטה', sub: 'Warsaw Central Apartment', chip: ['green', 'מאושר • 4 לילות'],
         det: [['כתובת ופרטי כניסה', 'Aleja Niepodległości 245, Ochota, ורשה. מספר אישור: <b>%%S:bk%%</b> | קוד סודי (PIN): <b>%%S:pin%%</b>. טלפון מארחים: <span dir="ltr">+48913111112</span>.']],
@@ -791,7 +797,10 @@
       (c.addr ? '<div class="addr" style="margin-top:12px">כתובת: ' + esc(c.addr) + '</div><a class="btn dark" target="_blank" rel="noopener" href="' + gm(c.addr) + '">ניווט למקום</a>' : '') +
       '<div class="btn-row" style="margin-top:8px"><button type="button" class="btn outline" style="margin:0;flex:1" data-editct="' + c.id + '">עריכה</button><button type="button" class="btn outline danger" style="margin:0;flex:1" data-delct="' + c.id + '">מחיקה</button></div></div>');
   }
-  function fld(id, label, type, v, ph) { return '<label class="fld"><span>' + label + '</span><input id="' + id + '" type="' + type + '" value="' + esc(v || '') + '"' + (ph ? ' placeholder="' + ph + '"' : '') + ' autocomplete="off"></label>'; }
+  function fld(id, label, type, v, ph) {
+    var icn = type === 'date' ? ic('cal') : (type === 'time' ? ic('clock') : '');
+    return '<label class="fld"><span>' + label + '</span><span class="inp' + (icn ? ' has-i' : '') + '"><input id="' + id + '" type="' + type + '" value="' + esc(v || '') + '"' + (ph ? ' placeholder="' + ph + '"' : '') + ' autocomplete="off">' + icn + '</span></label>';
+  }
   function renderThumbs() {
     var el = document.getElementById('f-thumbs'); if (!el || !FORM) return;
     el.innerHTML = FORM.imgs.map(function (s, i) { return '<div class="th"><img src="' + s + '" alt=""><button type="button" data-rmimg="' + i + '" aria-label="הסרה">✕</button></div>'; }).join('');
