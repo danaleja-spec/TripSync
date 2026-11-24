@@ -84,13 +84,35 @@ nav.bn button.on{background:#DDF5F2;color:#0F7F75;font-weight:600}
 .wzbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:14px 20px 24px;background:#FFFFFF;border-top:1px solid #ECEEF2;display:flex;gap:10px;z-index:20}
 .wzbar .prev{width:100px;flex-shrink:0;height:54px;border-radius:16px;border:1px solid #DDE1E8;background:#FFFFFF;color:#141B2D;font-size:15px;font-weight:600}
 .steps{display:flex;gap:4px}.steps span{flex:1;height:4px;border-radius:2px;background:#DDE1E8}.steps span.d{background:#141B2D}.steps span.c{background:#1AA89B}
-.ov{position:fixed;inset:0;background:rgba(20,27,45,.55);z-index:40;display:flex;align-items:flex-end;justify-content:center;animation:fd .15s}
-.sh{background:#FFFFFF;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;border-radius:28px 28px 0 0;padding:10px 20px 24px;display:flex;flex-direction:column;gap:12px;animation:up .2s}
+.ov{position:fixed;inset:0;background:rgba(20,27,45,.55);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.sh{background:#FFFFFF;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;border-radius:28px 28px 0 0;padding:10px 20px 24px;display:flex;flex-direction:column;gap:12px}
 .grab{width:40px;height:5px;border-radius:3px;background:#C7CDDA;align-self:center;flex-shrink:0}
 .xb{width:44px;height:44px;border-radius:22px;background:#F6F7F9;color:#141B2D;display:flex;align-items:center;justify-content:center;border:none;flex-shrink:0}
 .ov.cn{align-items:center;padding:24px}
-.dlg{background:#FFFFFF;border-radius:24px;padding:24px 20px 20px;box-shadow:0 20px 50px rgba(20,27,45,.3);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;width:100%;max-width:360px;animation:up .2s}
-@keyframes up{from{transform:translateY(40px);opacity:.4}}@keyframes fd{from{opacity:0}}
+.dlg{background:#FFFFFF;border-radius:24px;padding:24px 20px 20px;box-shadow:0 20px 50px rgba(20,27,45,.3);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;width:100%;max-width:360px}
+@keyframes up{from{transform:translateY(100%)}}@keyframes dn{to{transform:translateY(100%)}}@keyframes fd{from{opacity:0}}@keyframes fdo{to{opacity:0}}@keyframes pop{from{transform:scale(.92);opacity:0}}@keyframes popo{to{transform:scale(.95);opacity:0}}
+.ov.in{animation:fd .22s ease}.ov.in .sh{animation:up .3s cubic-bezier(.2,.8,.25,1)}.ov.in .dlg{animation:pop .22s cubic-bezier(.2,.8,.25,1)}
+.ov.out{animation:fdo .2s ease forwards;pointer-events:none}.ov.out .sh{animation:dn .22s cubic-bezier(.5,0,.75,0) forwards}.ov.out .dlg{animation:popo .18s ease forwards}
+.pg{position:relative;left:0}
+.pg.f{animation:pgf .28s cubic-bezier(.2,.8,.25,1)}.pg.b{animation:pgb .28s cubic-bezier(.2,.8,.25,1)}.pg.x{animation:fd .2s ease}
+@keyframes pgf{from{opacity:0;left:-32px}}@keyframes pgb{from{opacity:0;left:32px}}
+@media (prefers-reduced-motion:reduce){.pg.f,.pg.b,.pg.x,.ov.in,.ov.in .sh,.ov.in .dlg,.ov.out,.ov.out .sh,.ov.out .dlg{animation:none}}
+select.inp{appearance:none;-webkit-appearance:none;background:#FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235B6478' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat left 10px center;padding-left:36px}
+.cmb{position:relative;min-width:0}
+.cmb .inp{padding-left:36px}
+.cmb-ar{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:18px;height:18px;border:none;background:none;color:#5B6478;display:flex;align-items:center;justify-content:center;padding:0}
+.cmb-l{position:absolute;top:calc(100% + 4px);right:0;left:0;min-width:180px;z-index:50;background:#FFFFFF;border:1px solid #DDE1E8;border-radius:12px;box-shadow:0 8px 24px rgba(20,27,45,.12);max-height:224px;overflow-y:auto;margin:0;padding:4px;list-style:none;animation:fd .15s}
+.cmb-l li{padding:10px 12px;border-radius:8px;font-size:14px;cursor:pointer}
+.cmb-l li:hover,.cmb-l li:active{background:#F6F7F9}
+.datef{display:flex;align-items:center;text-align:right;position:relative;padding-left:40px;cursor:pointer}
+.datef .i{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#5B6478}
+.calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:4px}
+.calg span{font-size:12px;color:#5B6478;text-align:center;padding:4px 0}
+.calg button{height:42px;border:none;background:none;font-size:15px;font-weight:500;color:#141B2D;border-radius:0}
+.calg button.rg{background:#DDF5F2}
+.calg button.s,.calg button.e{background:#141B2D;color:#FFFFFF;font-weight:700}
+.calg button.s{border-radius:0 12px 12px 0}.calg button.e{border-radius:12px 0 0 12px}.calg button.s.e{border-radius:12px}
+.calg button.td{box-shadow:inset 0 0 0 1.5px #1AA89B;border-radius:12px}
 .toast{position:fixed;bottom:104px;left:50%;transform:translateX(-50%);background:#141B2D;color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;z-index:60;box-shadow:0 8px 28px rgba(20,27,45,.2);max-width:90%;text-align:center}
 .cnt{height:44px;border:1px solid #DDE1E8;border-radius:12px;display:flex;align-items:center;justify-content:space-between;padding:0 4px;background:#fff}
 .cnt button{width:32px;height:32px;border:none;border-radius:8px;background:#ECEEF2;color:#141B2D;font-size:16px;font-weight:700}
@@ -142,7 +164,7 @@ function rangeTxt(t,yr=true){
   const o={day:'numeric',month:'short'};if(yr)o.year='numeric';
   if(!okDate(t.end)||t.end===t.start)return fmt(t.start,o);
   const a=D(t.start),b=D(t.end);
-  if(a.getMonth()===b.getMonth()&&a.getFullYear()===b.getFullYear())return a.getDate()+'–'+fmt(t.end,o);
+  if(a.getMonth()===b.getMonth()&&a.getFullYear()===b.getFullYear())return '\u2066'+a.getDate()+'–'+b.getDate()+'\u2069 '+fmt(t.end,o).replace(/^\d+\s*/,'');
   return fmt(t.start,{day:'numeric',month:'short'})+' – '+fmt(t.end,o);
 }
 function tripDays(t){const out=[];if(!okDate(t.start))return out;const e=okDate(t.end)?t.end:t.start;let d=t.start;for(let i=0;i<60&&d<=e;i++){out.push(d);d=addDays(d,1)}return out}
@@ -216,6 +238,10 @@ const TYPES={flight:{l:'טיסה',ic:'plane',c:'t'},stay:{l:'לינה',ic:'build
 const tt=t=>TYPES[t]||TYPES.other;
 const AV=['t','v','a','o','g','b'];
 const avc=i=>AV[i%AV.length];
+const AIRLINES=['אל על','ישראייר','ארקיע','Wizz Air','Ryanair','easyJet','Blue Bird','Air Haifa','Lufthansa','Swiss','Austrian','LOT','Aegean','Turkish Airlines','Pegasus','ITA Airways','Air France','KLM','British Airways','Iberia','Vueling','Air Europa','Brussels Airlines','Smartwings','TAROM','Bulgaria Air','Air Serbia','Croatia Airlines','Emirates','flydubai','Etihad','United','Delta','American Airlines','Air Canada','Ethiopian','Air India','Cathay Pacific'];
+const AIRPORTS=['תל אביב · TLV','אילת רמון · ETM','חיפה · HFA','ורשה · WAW','קרקוב · KRK','פראג · PRG','בודפשט · BUD','וינה · VIE','ברלין · BER','מינכן · MUC','פרנקפורט · FRA','ציריך · ZRH','ז׳נבה · GVA','פריז · CDG','לונדון · LHR','לונדון לוטון · LTN','אמסטרדם · AMS','בריסל · BRU','ברצלונה · BCN','מדריד · MAD','ליסבון · LIS','רומא · FCO','מילאנו · MXP','ונציה · VCE','נאפולי · NAP','אתונה · ATH','סלוניקי · SKG','רודוס · RHO','כרתים · HER','לרנקה · LCA','פאפוס · PFO','איסטנבול · IST','אנטליה · AYT','בטומי · BUS','טביליסי · TBS','בוקרשט · OTP','סופיה · SOF','בלגרד · BEG','ריגה · RIX','בודפשט · BUD','דובאי · DXB','אבו דאבי · AUH','ניו יורק · JFK','בנגקוק · BKK','טוקיו · NRT'].filter((x,i,a)=>a.indexOf(x)===i);
+const OPTS={air:AIRLINES,port:AIRPORTS};
+const combo=(id,name,val,kind,cls,ph)=>`<div class="cmb"><input id="${id}" name="${name}" class="inp${cls?' '+cls:''}" value="${h(val)}" autocomplete="off" data-cmb="${kind}" role="combobox" aria-expanded="false"${ph?` placeholder="${h(ph)}"`:''}><button type="button" class="cmb-ar" data-act="cmbToggle" tabindex="-1" aria-label="פתיחת רשימה">${ic('chevd',18)}</button></div>`;
 const CURS=['EUR','USD','GBP','PLN','CZK','HUF','CHF','RON','BGN','TRY','GEL','THB','JPY','AED','CAD','AUD','ILS'];
 
 /* ================= storage ================= */
@@ -259,11 +285,11 @@ const CAP={mcp:use('mcp'),sample:use('sample'),downloads:use('downloads')};
 
 /* ================= routing ================= */
 let R={n:S.profile.welcomed?'trips':'welcome',p:{}};
-const HIST=[];let DR=null;let UI={};
-function go(n,p,replace){if(!replace)HIST.push(R);R={n,p:p||{}};DR=null;UI={};render();window.scrollTo(0,0);try{history.pushState({},'')}catch(e){}}
-function back(){DR=null;UI={};R=HIST.pop()||{n:'trips',p:{}};render();window.scrollTo(0,0)}
+const HIST=[];let DR=null;let UI={};let ANIM='',DRA=false;
+function go(n,p,replace){ANIM='f';if(!replace)HIST.push(R);R={n,p:p||{}};DR=null;UI={};render();window.scrollTo(0,0);try{history.pushState({},'')}catch(e){}}
+function back(){ANIM='b';DR=null;UI={};R=HIST.pop()||{n:'trips',p:{}};render();window.scrollTo(0,0)}
 window.addEventListener('popstate',()=>{if(DR){DR=null;render()}else if(HIST.length)back()});
-function drawer(n,p){DR={n,p:p||{}};render()}
+function drawer(n,p){DRA=true;DR={n,p:p||{}};render()}
 function closeDr(){DR=null;render()}
 let toastT;function toast(m){let el=$('.toast');if(!el){el=document.createElement('div');el.className='toast';el.setAttribute('role','status');document.body.appendChild(el)}el.textContent=m;clearTimeout(toastT);toastT=setTimeout(()=>el.remove(),2600)}
 let CONFIRM=null;
@@ -350,7 +376,8 @@ const wzItems=ty=>WZ.items.filter(i=>i.type===ty);
 function wzItemForm(ty){const e=WZ.ed&&WZ.ed.type===ty?WZ.ed:null;if(!e)return'';
   const f=(k,l,o={})=>`<div class="fld s" ${o.span?'style="grid-column:span '+o.span+'"':''}><label for="wi-${k}" class="ls">${l}</label><input id="wi-${k}" name="${k}" class="inp s" type="${o.type||'text'}" value="${h(e[k])}" ${o.ltr?'dir="ltr" style="text-align:right"':''} ${o.ph?`placeholder="${h(o.ph)}"`:''}></div>`;
   let g='';
-  if(ty==='flight')g=`<div class="g3">${f('provider','חברה')}${f('flightNo','מס׳ טיסה',{ltr:1})}${f('code','קוד הזמנה',{ltr:1})}${f('date','תאריך',{type:'date'})}${f('time','המראה',{type:'time'})}${f('endTime','נחיתה',{type:'time'})}${f('place','מ־',{ph:'TLV'})}${f('to','אל',{ph:'שדה יעד'})}${f('terminal','טרמינל')}${f('baggage','כבודה',{span:3})}</div>`;
+  const cf=(k,l,kind,ph)=>`<div class="fld s"><label for="wi-${k}" class="ls">${l}</label>${combo('wi-'+k,k,e[k],kind,'s',ph)}</div>`;
+  if(ty==='flight')g=`${cf('provider','חברת תעופה','air','בחירה או הקלדה')}<div class="g2" style="gap:8px">${cf('place','מ־','port','שדה יציאה')}${cf('to','אל','port','שדה נחיתה')}${f('flightNo','מס׳ טיסה',{ltr:1})}${f('code','קוד הזמנה',{ltr:1})}</div><div class="g3">${f('date','תאריך',{type:'date'})}${f('time','המראה',{type:'time'})}${f('endTime','נחיתה',{type:'time'})}</div><div class="g3">${f('terminal','טרמינל')}${f('baggage','כבודה',{span:2})}</div>`;
   if(ty==='stay')g=`${f('title','שם המקום')}<div class="g2">${f('place','כתובת')}${f('provider','אתר ההזמנה')}${f('date','צ׳ק-אין',{type:'date'})}${f('endDate','צ׳ק-אאוט',{type:'date'})}${f('code','מספר אישור',{ltr:1})}${f('entryCode','קוד כניסה')}${f('phone','טלפון מארח',{type:'tel',ltr:1})}${f('url','קישור להזמנה',{type:'url',ltr:1})}</div>`;
   if(ty==='ticket')g=`${f('title','שם')}<div class="g3">${f('date','תאריך',{type:'date'})}${f('time','שעה',{type:'time'})}<div class="fld s"><span class="ls">כרטיסים</span><div class="cnt"><button type="button" data-act="wzQty" data-d="1" aria-label="הוספת כרטיס">+</button><span>${h(e.qty||1)}</span><button type="button" data-act="wzQty" data-d="-1" aria-label="הסרת כרטיס">−</button></div></div></div><div class="g2">${f('code','מספר אישור',{ltr:1})}${f('place','כתובת')}</div>`;
   if(ty==='transport')g=`<div class="g2">${f('title','איך',{ph:'למשל: מונית, שאטל'})}${f('date','מתי',{type:'date'})}</div>${f('notes','הערות')}`;
@@ -380,7 +407,7 @@ SC.wizard=()=>{
     b=`${wzHead('לאן נוסעים?','יעד ותאריכים. זה השלב היחיד שחובה.')}
     <div class="fld"><label for="w-name" class="lbl">שם הטיול</label><input id="w-name" name="name" class="inp" value="${h(WZ.name)}" placeholder="למשל: חופשת קיץ ברומא"></div>
     <div class="fld"><div style="display:flex;align-items:center;justify-content:space-between"><label for="w-dest" class="lbl">יעד</label>${fromMailBadge('dest')}</div><div class="g2"><input id="w-dest" name="dest" class="inp" value="${h(WZ.dest)}" placeholder="עיר" aria-label="עיר"><input name="country" class="inp" value="${h(WZ.country)}" placeholder="מדינה" aria-label="מדינה"></div></div>
-    <div class="fld"><div style="display:flex;align-items:center;justify-content:space-between"><span class="lbl">תאריכים</span>${fromMailBadge('dates')}</div><div class="g2"><div class="fld s"><label for="w-from" class="ls">יציאה</label><input id="w-from" name="start" type="date" class="inp" value="${h(WZ.start)}"></div><div class="fld s"><label for="w-to" class="ls">חזרה</label><input id="w-to" name="end" type="date" class="inp" value="${h(WZ.end)}"></div></div>${nd!=null?`<span class="ls">${nd+1} ימים · ${nd} לילות</span>`:''}</div>
+    <div class="fld"><div style="display:flex;align-items:center;justify-content:space-between"><span class="lbl">תאריכים</span>${fromMailBadge('dates')}</div><button type="button" id="w-dates" class="inp datef" data-act="wzCal" aria-label="בחירת תאריכי יציאה וחזרה">${WZ.start?h(rangeTxt(WZ)):'<span style="color:#8A92A3">בחירת תאריכי יציאה וחזרה</span>'}${ic('cal',20)}</button>${nd!=null?`<span class="ls">${nd+1} ימים · ${nd} לילות</span>`:''}</div>
     <div class="fld"><span class="lbl">תמונת כיסוי <span style="font-weight:400;color:#5B6478">(לא חובה)</span></span>${WZ.cover?`<div class="cover" data-cover="${h(WZ.cover)}" style="position:relative;height:120px;border-radius:16px;overflow:hidden"><button type="button" data-act="wzCover" style="position:absolute;bottom:10px;left:10px;height:36px;padding:0 12px;border:none;border-radius:999px;background:rgba(255,255,255,.92);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px">${ic('camera',16)}החלפת תמונה</button></div>`:`<button type="button" data-act="wzCover" style="height:96px;border-radius:16px;border:1.5px dashed #AEB5C4;background:#FFFFFF;color:#4A5368;font-size:14px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">${ic('image',22)}העלאת תמונה<span style="font-size:12px;font-weight:400;color:#5B6478">בלי תמונה יוצג רקע צבעוני</span></button>`}</div>`;
     next='המשך לנוסעים';}
   if(s===2){const ta=WZ.tadd;
@@ -542,7 +569,7 @@ SC.item=({tid,iid})=>{
 
 /* ---- Editor ---- */
 const EFIELDS={
- flight:[['title','שם'],['date','תאריך','date','time','המראה','time'],['place','מ־ (שדה תעופה)',0,'to','אל'],['flightNo','מס׳ טיסה','ltr','code','קוד הזמנה','ltr'],['endDate','תאריך נחיתה','date','endTime','נחיתה','time'],['provider','חברה',0,'terminal','טרמינל'],['baggage','כבודה'],['url','קישור לצ׳ק-אין','url']],
+ flight:[['title','שם'],['date','תאריך','date','time','המראה','time'],['place','מ־ (שדה תעופה)','port','to','אל','port'],['flightNo','מס׳ טיסה','ltr','code','קוד הזמנה','ltr'],['endDate','תאריך נחיתה','date','endTime','נחיתה','time'],['provider','חברת תעופה','air','terminal','טרמינל'],['baggage','כבודה'],['url','קישור לצ׳ק-אין','url']],
  stay:[['title','שם המקום'],['date','צ׳ק-אין','date','time','משעה','time'],['endDate','צ׳ק-אאוט','date','endTime','עד שעה','time'],['place','כתובת','map'],['code','מספר אישור','ltr','entryCode','קוד כניסה'],['phone','טלפון מארח','tel','provider','אתר ההזמנה'],['url','קישור להזמנה','url']],
  ticket:[['title','שם'],['date','תאריך','date','time','שעה','time'],['place','מיקום','map'],['code','מספר הזמנה','ltr','url','קישור','url'],['qty','כרטיסים','num','price','מחיר']],
  restaurant:[['title','שם'],['date','תאריך','date','time','שעה','time'],['place','כתובת','map'],['code','מספר הזמנה','ltr','phone','טלפון','tel'],['diners','סועדים','num','url','קישור','url']],
@@ -554,7 +581,7 @@ SC.editor=({tid,iid,type,date,pend})=>{
   const src=pend?(t.pending||[]).find(x=>x.id===iid):item(t,iid);
   if(!UI.ed)UI.ed=src?clone(src):{id:uid(),type:type||'other',date:date||'',source:'manual',travelers:t.travelers.map(p=>p.id),files:[],qty:type==='ticket'?'1':''};
   const e=UI.ed;const rows=EFIELDS[e.type]||EFIELDS.other;
-  const inp=(k,l,kind)=>{const ty=kind==='date'?'date':kind==='time'?'time':kind==='url'?'url':kind==='tel'?'tel':'text';const ltr=kind==='ltr'||kind==='url'||kind==='tel';
+  const inp=(k,l,kind)=>{if(kind==='port'||kind==='air')return `<div class="fld"><label for="f-${k}" class="lbl">${h(l)}</label>${combo('f-'+k,k,e[k],kind,'',kind==='air'?'בחירה או הקלדה':'בחירה או הקלדה')}</div>`;const ty=kind==='date'?'date':kind==='time'?'time':kind==='url'?'url':kind==='tel'?'tel':'text';const ltr=kind==='ltr'||kind==='url'||kind==='tel';
     return `<div class="fld"><label for="f-${k}" class="lbl">${h(l)}</label><input id="f-${k}" name="${k}" type="${ty}" class="inp" value="${h(e[k])}" ${ltr?'dir="ltr" style="text-align:right"':''} ${kind==='num'?'inputmode="numeric"':''}>${kind==='map'&&e[k]?`<a href="${h(mapsQ(e[k]))}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600">${ic('pin',16)}פתיחה ב-Google Maps</a>`:''}</div>`};
   const fields=rows.map(r=>r.length>3?`<div class="g2">${inp(r[0],r[1],r[2])}${inp(r[3],r[4],r[5])}</div>`:inp(r[0],r[1],r[2])).join('');
   const sel=new Set(e.travelers||[]);
@@ -855,13 +882,27 @@ DRW.share=p=>{const t=trip(p.tid);
    <div class="g2"><button class="ctao" style="height:52px" data-act="copyTrip" data-tid="${h(t.id)}">${ic('link',18)}העתקה כטקסט</button><a class="cta" style="height:52px;font-size:14px" href="${h('https://wa.me/?text='+encodeURIComponent(tripSummary(t)))}" target="_blank" rel="noopener">שליחה ב-WhatsApp</a></div>`};
 DRW.dayTitle=p=>{const t=trip(p.tid);return `<form data-form="dayTitle" style="display:contents">${shHead('כותרת ליום '+dayIndex(t,p.d),longD(p.d))}<div class="fld s"><label for="dt-v" class="lbl">כותרת</label><input id="dt-v" name="v" class="inp" placeholder="למשל: נחיתה והגעה לדירה" value="${h((t.dayTitles||{})[p.d])}"></div>${shBtns('שמירה')}</form>`};
 DRW.paste=()=>`<form data-form="paste" style="display:contents">${shHead('הדבקת תוכן של מייל','Claude יחלץ את פרטי ההזמנה')}<textarea name="txt" class="inp" rows="8" placeholder="הדבקת הטקסט של אישור ההזמנה כאן" aria-label="תוכן המייל"></textarea>${shBtns('חילוץ פרטים')}</form>`;
+DRW.cal=()=>{const c=UI.cal;const first=new Date(c.y,c.m,1);const dim=new Date(c.y,c.m+1,0).getDate();const td=today();
+  const cells=[];for(let i=0;i<first.getDay();i++)cells.push('<i></i>');
+  for(let d=1;d<=dim;d++){const ds=c.y+'-'+pad(c.m+1)+'-'+pad(d);const cl=[];if(ds===c.start)cl.push('s');if(ds===(c.end||c.start)&&c.start)cl.push('e');if(c.start&&c.end&&ds>c.start&&ds<c.end)cl.push('rg');if(ds===td&&!cl.length)cl.push('td');cells.push(`<button type="button" class="${cl.join(' ')}" data-act="calPick" data-d="${ds}" aria-pressed="${cl.includes('s')||cl.includes('e')}" aria-label="${h(fmt(ds,{weekday:'long',day:'numeric',month:'long'}))}">${d}</button>`)}
+  const lbl=new Date(c.y,c.m,1).toLocaleDateString('he-IL',{month:'long',year:'numeric'});
+  const nb='width:40px;height:40px;border-radius:20px;border:1px solid #DDE1E8;background:#FFFFFF;color:#141B2D;display:flex;align-items:center;justify-content:center';
+  return `${shHead('מתי נוסעים?',c.start?(c.end?rangeTxt({start:c.start,end:c.end})+' · '+(diffDays(c.start,c.end)+1)+' ימים':'יציאה '+longD(c.start)+' · עכשיו בוחרים חזרה'):'בחירת יום יציאה ויום חזרה')}
+   <div style="display:flex;align-items:center;justify-content:space-between"><button type="button" data-act="calNav" data-d="-1" aria-label="החודש הקודם" style="${nb}">${ic('back',18)}</button><b style="font-size:16px">${h(lbl)}</b><button type="button" data-act="calNav" data-d="1" aria-label="החודש הבא" style="${nb}">${ic('fwd',18)}</button></div>
+   <div class="calg">${WD.map(x=>`<span>${x}</span>`).join('')}${cells.join('')}</div>
+   <div style="margin-top:8px;display:flex;gap:10px"><button type="button" data-act="closeDr" style="width:100px;height:52px;border-radius:16px;border:1px solid #DDE1E8;background:#FFFFFF;color:#141B2D;font-size:15px;font-weight:600;flex-shrink:0">ביטול</button><button type="button" class="cta" style="flex-grow:1;font-size:16px" data-act="calOk" ${c.start?'':'disabled'}>בחירה</button></div>`};
 DRW.name=()=>`<form data-form="name" style="display:contents">${shHead('שם לתצוגה')}<input name="name" class="inp" value="${h(S.profile.name)}" aria-label="שם">${shBtns('שמירה')}</form>`;
 
 /* ================= render ================= */
 function render(){
   const f=SC[R.n]||SC.trips;let html;try{html=f(R.p)}catch(e){console.error(e);R={n:'trips',p:{}};html=SC.trips()}
-  if(DR&&DRW[DR.n]){let inner='';try{inner=DRW[DR.n](DR.p)}catch(e){console.error(e)}if(inner)html+=DR.n==='confirm'?`<div class="ov cn" data-act="ovClose">${inner}</div>`:`<div class="ov" data-act="ovClose"><div class="sh" role="dialog" aria-modal="true">${inner}</div></div>`}
-  $('#app').innerHTML=html;
+  html=`<div class="pg ${ANIM}">${html}</div>`;
+  if(DR&&DRW[DR.n]){let inner='';try{inner=DRW[DR.n](DR.p)}catch(e){console.error(e)}const ia=DRA?' in':'';if(inner)html+=DR.n==='confirm'?`<div class="ov cn${ia}" data-act="ovClose">${inner}</div>`:`<div class="ov${ia}" data-act="ovClose"><div class="sh" role="dialog" aria-modal="true">${inner}</div></div>`}
+  const oldOv=$('#app > .ov');const shTop=$('#app .sh')?$('#app .sh').scrollTop:0;const ae=document.activeElement;const aeId=ae&&ae.id;
+  $('#app').innerHTML=html;ANIM='';
+  if(oldOv&&!DR){document.body.appendChild(oldOv);oldOv.classList.remove('in');oldOv.classList.add('out');setTimeout(()=>oldOv.remove(),240)}
+  if(DR&&!DRA){const sh=$('#app .sh');if(sh)sh.scrollTop=shTop}
+  DRA=false;
   document.querySelectorAll('[data-cover]').forEach(async el=>{const u=await blobUrl(el.dataset.cover);if(u)el.style.backgroundImage=`url("${u}")`});
   document.querySelectorAll('[data-docview]').forEach(async el=>{const u=await blobUrl(el.dataset.docview);el.textContent='';if(!u){el.textContent='הקובץ לא נמצא במכשיר הזה';return}
     if((el.dataset.mime||'').startsWith('image/')){const im=document.createElement('img');im.src=u;im.alt='תצוגת הקובץ';im.style.cssText='max-width:100%;max-height:100%;object-fit:contain';el.appendChild(im)}
@@ -879,18 +920,23 @@ A.joinFromWelcome=()=>{S.profile.welcomed=true;persist();R={n:'trips',p:{}};go('
 function readWz(){const f=$('form[data-form="wizard"]');if(f){const fd=new FormData(f);['name','dest','country','start','end','myMap'].forEach(k=>{if(fd.has(k))WZ[k]=String(fd.get(k)).trim()});if(WZ.step===7)WZ.gmail=fd.has('gmail')}
   const n=$('#t2-name');if(n)WZ.tadd.name=n.value;const a=$('#t2-age');if(a)WZ.tadd.age=a.value;readWzEd()}
 function readWzEd(){if(!WZ||!WZ.ed)return;document.querySelectorAll('[id^="wi-"]').forEach(el=>{WZ.ed[el.name]=el.value.trim()})}
-const wzRender=()=>{render();scrollTo(0,0)};
+const wzRender=(d)=>{ANIM=d||'f';render();scrollTo(0,0)};
 A.wzClose=()=>{WZ=null;back()};
-A.wzPrev=()=>{readWz();WZ.ed=null;if(WZ.step>(CL?0:1)){WZ.step--;wzRender()}else{WZ=null;back()}};
+A.wzPrev=()=>{readWz();WZ.ed=null;if(WZ.step>(CL?0:1)){WZ.step--;wzRender('b')}else{WZ=null;back()}};
 A.wzNext=()=>{WZ.step=1;wzRender()};
 A.wzSkip=()=>{readWz();WZ.ed=null;WZ.step++;wzRender()};
 A.wzGo=el=>{readWz();WZ.step=+el.dataset.s;wzRender()};
 A.wzCover=async()=>{readWz();const f=await pickFile('image/*');if(!f)return;try{const x=await storeFile(f,1400);WZ.cover=x.key;render()}catch(e){toast('לא ניתן לשמור את התמונה')}};
+A.wzCal=()=>{readWz();const b=okDate(WZ.start)?D(WZ.start):new Date();UI.cal={y:b.getFullYear(),m:b.getMonth(),start:WZ.start||'',end:WZ.end||''};drawer('cal')};
+A.calNav=el=>{const c=UI.cal;c.m+= +el.dataset.d;if(c.m<0){c.m=11;c.y--}if(c.m>11){c.m=0;c.y++}render()};
+A.calPick=el=>{const c=UI.cal;const d=el.dataset.d;if(!c.start||c.end||d<c.start){c.start=d;c.end=''}else c.end=d;render()};
+A.calOk=()=>{const c=UI.cal;WZ.start=c.start;WZ.end=c.end||c.start;WZ.fromMail.dates=0;DR=null;render()};
+A.cmbToggle=el=>{const inp=el.parentNode.querySelector('input');if(el.parentNode.querySelector('.cmb-l'))cmbClose();else{inp.focus();cmbOpen(inp,true)}};
 A.wzAge=el=>{readWz();WZ.tadd.adult=el.dataset.v==='1';render()};
 A.wzDoc=async el=>{readWz();const f=await pickFile('image/*,application/pdf');if(!f)return;try{const x=await storeFile(f);x.kind=el.dataset.k;(WZ.tadd.docs=WZ.tadd.docs||[]).push(x);render()}catch(e){toast('לא ניתן לשמור את הקובץ')}};
 A.wzAddTr=()=>{readWz();const ta=WZ.tadd;if(!ta.name||!ta.name.trim()){$('#t2-name').focus();return}WZ.travelers.push({id:uid(),name:ta.name.trim(),adult:ta.adult,age:ta.adult?'':ta.age||'',me:false,docs:ta.docs||[]});WZ.tadd={adult:true,docs:[]};render()};
 A.wzDelTr=el=>{readWz();WZ.travelers=WZ.travelers.filter(p=>p.id!==el.dataset.id);render()};
-A.wzAdd=el=>{readWz();WZ.ed={id:uid(),type:el.dataset.t,source:'manual',qty:el.dataset.t==='ticket'?'2':''};render()};
+A.wzAdd=el=>{readWz();const ty=el.dataset.t;WZ.ed={id:uid(),type:ty,source:'manual',qty:ty==='ticket'?'2':''};if(ty==='flight'){const fl=wzItems('flight');const home='תל אביב · TLV';if(!fl.length){WZ.ed.place=home;WZ.ed.date=WZ.start||''}else{WZ.ed.place=fl[fl.length-1].to||'';WZ.ed.to=home;WZ.ed.date=WZ.end||'';WZ.ed.provider=fl[0].provider||''}}render()};
 A.wzAddT=el=>{readWz();const v=el.dataset.v;WZ.ed={id:uid(),type:'transport',title:v,kind:/רכב/.test(v)?'car':/כרטיס/.test(v)?'pass':'transfer',source:'manual'};render()};
 A.wzEdit=el=>{readWz();const i=WZ.items.find(x=>x.id===el.dataset.id);if(i){WZ.ed=clone(i);render()}};
 A.wzDel=el=>{readWz();WZ.items=WZ.items.filter(x=>x.id!==el.dataset.id);render()};
@@ -1001,7 +1047,7 @@ const F={};
 F.welcome=fd=>{S.profile.name=String(fd.get('name')||'').trim().slice(0,40);S.profile.welcomed=true;persist();R={n:'trips',p:{}};render()};
 F.wizard=()=>{readWz();const s=WZ.step;
   if(WZ.ed){A.wzEdSave();if(WZ.ed)return}
-  if(s===1){if(!WZ.dest){toast('יש למלא יעד');$('#w-dest').focus();return}if(!okDate(WZ.start)||!okDate(WZ.end)){toast('יש לבחור תאריכי יציאה וחזרה');return}if(WZ.end<WZ.start){toast('תאריך החזרה לפני היציאה');return}}
+  if(s===1){if(!WZ.dest){toast('יש למלא יעד');$('#w-dest').focus();return}if(!okDate(WZ.start)){A.wzCal();return}if(!okDate(WZ.start)||!okDate(WZ.end)){toast('יש לבחור תאריכי יציאה וחזרה');return}if(WZ.end<WZ.start){toast('תאריך החזרה לפני היציאה');return}}
   if(s===2&&WZ.tadd.name&&WZ.tadd.name.trim())A.wzAddTr();
   if(s<7){WZ.step++;wzRender();return}
   const t={id:uid(),name:WZ.name||('טיול ל'+WZ.dest),dest:WZ.dest,country:WZ.country,start:WZ.start,end:WZ.end,color:S.trips.length%6,cover:WZ.cover||'',myMap:safeUrl(WZ.myMap),created:Date.now(),cur:{code:'EUR',rate:''},dayTitles:{},
@@ -1138,7 +1184,7 @@ document.addEventListener('click',ev=>{
   const a=ev.target.closest('[data-act]');
   if(a&&!(a.dataset.act==='ovClose'&&ev.target!==a)){if(a.tagName==='INPUT')return;const f=A[a.dataset.act];if(f){ev.preventDefault();f(a,ev)}return}
   const tb=ev.target.closest('[data-tab]');
-  if(tb){ev.preventDefault();const p={tid:tb.dataset.tid};const n=tb.dataset.tab;if(tb.dataset.push||!TAB_SCREENS.includes(R.n)||!TAB_SCREENS.includes(n))go(n,p);else{R={n,p};UI={};DR=null;render();scrollTo(0,0)}return}
+  if(tb){ev.preventDefault();const p={tid:tb.dataset.tid};const n=tb.dataset.tab;if(tb.dataset.push||!TAB_SCREENS.includes(R.n)||!TAB_SCREENS.includes(n))go(n,p);else{ANIM='x';R={n,p};UI={};DR=null;render();scrollTo(0,0)}return}
   const g=ev.target.closest('[data-go]');
   if(g){ev.preventDefault();const d=g.dataset;const p={};['tid','iid','pid','did','type','date','pend'].forEach(k=>{if(d[k])p[k]=d[k]});
     if(d.go==='wizard')WZ=null;
@@ -1148,7 +1194,16 @@ document.addEventListener('click',ev=>{
 document.addEventListener('change',ev=>{const el=ev.target;if(el.matches&&el.matches('input[type=checkbox][data-act]')){const f=A[el.dataset.act];if(f)f(el,ev)}});
 document.addEventListener('submit',ev=>{const f=ev.target.closest('[data-form]');if(!f)return;ev.preventDefault();const fn=F[f.dataset.form];if(fn)fn(new FormData(f),f)});
 document.addEventListener('input',ev=>{const el=ev.target;if(!el.dataset||!el.dataset.conv)return;const r=num($('#c-r').value);const v=num(el.value);const other=el.dataset.conv==='ils'?$('#c-b'):$('#c-a');if(!r||el.value===''){other.value='';return}other.value=(el.dataset.conv==='ils'?v*r:v/r).toFixed(2)});
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&DR)closeDr()});
+function cmbClose(){document.querySelectorAll('.cmb-l').forEach(u=>{const i=u.parentNode.querySelector('input');if(i)i.setAttribute('aria-expanded','false');u.remove()})}
+function cmbOpen(inp,all){const box=inp.parentNode;document.querySelectorAll('.cmb-l').forEach(u=>{if(u.parentNode!==box)u.remove()});
+  const q=all?'':inp.value.trim().toLowerCase();const list=(OPTS[inp.dataset.cmb]||[]).filter(x=>!q||x.toLowerCase().includes(q));
+  let ul=box.querySelector('.cmb-l');if(!list.length){if(ul)ul.remove();inp.setAttribute('aria-expanded','false');return}
+  if(!ul){ul=document.createElement('ul');ul.className='cmb-l';ul.setAttribute('role','listbox');box.appendChild(ul)}ul.textContent='';
+  list.forEach(x=>{const li=document.createElement('li');li.textContent=x;li.setAttribute('role','option');li.addEventListener('pointerdown',e=>{e.preventDefault();inp.value=x;cmbClose()});ul.appendChild(li)});inp.setAttribute('aria-expanded','true')}
+document.addEventListener('focusin',ev=>{const t=ev.target;if(t.dataset&&t.dataset.cmb)cmbOpen(t,true)});
+document.addEventListener('input',ev=>{const t=ev.target;if(t.dataset&&t.dataset.cmb)cmbOpen(t,false)});
+document.addEventListener('focusout',ev=>{const t=ev.target;if(t.dataset&&t.dataset.cmb)setTimeout(()=>{if(document.activeElement!==t)cmbClose()},150)});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){if($('.cmb-l')){cmbClose();return}if(DR)closeDr()}});
 window.addEventListener('online',render);window.addEventListener('offline',render);
 if(!CL&&'serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 render();
