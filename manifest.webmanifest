@@ -1,10 +1,11 @@
 {
+  "id": "./?app=tripsync",
   "name": "TripSync",
   "short_name": "TripSync",
   "description": "תכנון טיולים: לו״ז, טיסות, לינה, כרטיסים, נוסעים ומסמכים",
   "lang": "he",
   "dir": "rtl",
-  "start_url": "./index.html",
+  "start_url": "./?app=tripsync",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
